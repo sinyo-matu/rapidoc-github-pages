@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
-  title: Mock API Doc Server2
-  description: Mock API Doc
+  title: Mock API Doc Service2
+  description: Mock API Doc Service2
   version: 1.0.0
 servers:
   # https://swagger.io/docs/specification/api-host-and-base-path/
