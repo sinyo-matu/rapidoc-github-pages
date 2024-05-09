@@ -9,7 +9,7 @@ sed -i -e "s|</rapi-doc>|<header slot='header' style='margin:auto 0;font-size:sm
 for service in $(cd $INDEX_BASE/et-api-doc; find . -maxdepth 1 -type d -not -name '.' -not -name dist -not -name sample -print | sort)
 do
   service=$(basename "$service")
-  sed -i -e "s|</rapi-doc>| <a href='./$service/' style='margin-right:1em;color:white;'>$service</a></rapi-doc>|" $INDEX_FILE
+  sed -i -e "s|</rapi-doc>| <a href='../$service/' style='margin-right:1em;color:white;'>$service</a></rapi-doc>|" $INDEX_FILE
 done
 sed -i -e "s|</rapi-doc>|</header></rapi-doc>|" $INDEX_FILE
 
