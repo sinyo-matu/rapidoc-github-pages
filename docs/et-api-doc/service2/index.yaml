@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  title: Mock API Doc
+  title: Mock API Doc Server2
   description: Mock API Doc
   version: 1.0.0
 servers:
