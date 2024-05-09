@@ -43,16 +43,24 @@ jobs:
           cd RapiDoc
           npm install
           npm run build
-      - name: Checkhout
+      - name: Checkhout main branch
         uses: actions/checkout@v4
         with:
+          ref: main
           sparse-checkout: docs
-          path: repo
+          path: repo-main
+      - name: Checkhout develop branch
+        uses: actions/checkout@v4
+        with:
+          ref: develop
+          sparse-checkout: docs
+          path: repo-dev
       - name: Setup index.html
         run: |
-          cp repo/docs/github_pages/api_doc_pages.html RapiDoc/dist/index.html
-          cp -rp repo/docs/et-api-doc RapiDoc/dist/et-api-doc
-          bash repo/docs/github_pages/setup_rapidoc_index.sh
+          cp repo-dev/docs/github_pages/index.html RapiDoc/dist/index.html
+          cp -rp repo-main/docs/et-api-doc RapiDoc/dist/main/et-api-doc
+          cp -rp repo-dev/docs/et-api-doc RapiDoc/dist/develop/et-api-doc
+          bash repo-dev/docs/github_pages/setup_rapidoc_index.sh
         env:
           PAGE_TITLE: "API Doc"
           RAPIDOC_OPTIONS: "allow-authentication=false allow-spec-url-load=false allow-spec-file-load=false allow-server-selection=false allow-try=false render-style=view schema-style=table schema-description-expanded=true"
