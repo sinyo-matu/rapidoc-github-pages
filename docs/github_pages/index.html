@@ -10,6 +10,15 @@
 <body>
     <rapi-doc spec-url="%SPEC_URL%" %RAPIDOC_OPTIONS%></rapi-doc>
     <script src="rapidoc-min.js"></script>
+    <script>
+        document.querySelectorAll(".branch-button").forEach(ele => ele.addEventListener("click", event => {
+            // 変更に耐えられない脆弱ロジックです・・・
+            // dist/フォルダの構造に依存しています
+            const branch = event.target.dataset.branch;
+            const currentBranch = window.location.pathname.split('/').filter(x => x != '').slice(-2)[0];
+            window.location.href = window.location.href.replace(currentBranch, branch);
+        }));
+    </script>
 </body>
 
 </html>
