@@ -1,0 +1,59 @@
+name: Deploy Jekyll with GitHub Pages dependencies preinstalled
+
+on:
+  # Runs on pushes targeting the default branch
+  push:
+    branches: ["main", "develop"]
+    paths:
+      - "docs/**"
+      - ".github/workflows/deploy_api_doc_to_pages.yaml"
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  # Build job
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout rapi-doc/RapiDoc
+        uses: actions/checkout@v4
+        with:
+          repository: rapi-doc/RapiDoc
+          ref: v9.3.4
+          path: RapiDoc
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Build RapiDoc
+        run: |
+          cd RapiDoc
+          npm install
+          npm run build
+      - name: Checkhout
+        uses: actions/checkout@v4
+        with:
+          sparse-checkout: docs
+          path: /docs
+      - name: Setup index.html
+        run: |
+          cp docs/github_pages/api_doc_pages.html RapiDoc/dist/index.html
+          cp docs/et-api-docs /RapiDoc/dist/et-api-docs
+          bash docs/github_pages/setup_rapidoc_index.sh
+        env:
+          PAGE_TITLE: "API Doc"
+          RAPIDOC_OPTIONS: "allow-authentication=false allow-spec-url-load=false allow-spec-file-load=false allow-server-selection=false allow-try=false render-style=view schema-style=table schema-description-expanded=true"
+          PAGE_FAVICON: "favicon.ico"
+
+      - name: Deploy to Github Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: RapiDoc/dist

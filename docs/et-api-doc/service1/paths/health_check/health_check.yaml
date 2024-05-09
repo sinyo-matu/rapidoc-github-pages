@@ -1,0 +1,31 @@
+get:
+  summary: ヘルスチェックAPI
+  description: 疎通確認用のAPI
+  tags:
+    - health-check
+  servers:
+    # https://swagger.io/docs/specification/api-host-and-base-path/
+    - url: "{protocol}://{environment}/"
+      variables:
+        protocol:
+          default: http
+          enum:
+            - http
+            - https
+        environment:
+          default: localhost:4002
+          enum:
+            - localhost:4002 # local
+  parameters:
+    - $ref: "../../index.yaml#/components/parameters/ContentType"
+  responses:
+    "200":
+      description: Success Response
+      headers:
+        content-length:
+          $ref: "../../index.yaml#/components/headers/contentLength"
+      content:
+        text/plain:
+          schema:
+            type: string
+          example: OK
