@@ -1,0 +1,5 @@
+contentType:
+  description: コンテンツタイプ
+  schema:
+    type: string
+    example: application/json

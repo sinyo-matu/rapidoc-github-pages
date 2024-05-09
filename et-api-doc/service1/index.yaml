@@ -1,0 +1,33 @@
+openapi: 3.0.3
+info:
+  title: Mock API Doc
+  description: Mock API Doc
+  version: 1.0.0
+servers:
+  # https://swagger.io/docs/specification/api-host-and-base-path/
+  - url: "{protocol}://{environment}/api/v1"
+    variables:
+      protocol:
+        default: http
+        enum:
+          - http
+          - https
+      environment:
+        default: localhost:4002
+        enum:
+          - localhost:4002 # local
+paths:
+  # health_check
+  /health_check:
+    $ref: "./paths/health_check/index.yaml#/~1health_check"
+components:
+  # 共通のrequest parameters
+  parameters:
+    ContentType:
+      $ref: "./components/parameters/content_type.yaml#/ContentType"
+  # 共通のresponse headers
+  headers:
+    contentLength:
+      $ref: "./components/headers/content_length.yaml#/contentLength"
+    contentType:
+      $ref: "./components/headers/content_type.yaml#/contentType"

@@ -1,0 +1,8 @@
+ContentType:
+  name: Content-Type
+  description: 'コンテンツタイプ'
+  in: header
+  required: true
+  schema:
+    type: string
+  example: application/json
