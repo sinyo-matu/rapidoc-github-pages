@@ -58,6 +58,7 @@ jobs:
       - name: Setup index.html
         run: |
           cp repo-dev/docs/github_pages/index.html RapiDoc/dist/index.html
+          mkdir -p RapiDoc/dist/main/et-api-doc&&mkdir -p RapiDoc/dist/develop/et-api-doc
           cp -rp repo-main/docs/et-api-doc RapiDoc/dist/main/et-api-doc
           cp -rp repo-dev/docs/et-api-doc RapiDoc/dist/develop/et-api-doc
           bash repo-dev/docs/github_pages/setup_rapidoc_index.sh
