@@ -45,7 +45,7 @@ jobs:
       - name: Setup index.html
         run: |
           cp repo/docs/github_pages/api_doc_pages.html RapiDoc/dist/index.html
-          cp repo/docs/et-api-docs RapiDoc/dist/et-api-docs
+          cp repo/docs/et-api-doc RapiDoc/dist/et-api-doc
           bash repo/docs/github_pages/setup_rapidoc_index.sh
         env:
           PAGE_TITLE: "API Doc"
