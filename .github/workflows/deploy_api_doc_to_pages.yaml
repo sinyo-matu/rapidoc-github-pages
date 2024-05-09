@@ -41,11 +41,11 @@ jobs:
         uses: actions/checkout@v4
         with:
           sparse-checkout: docs
-          path: docs
+          path: ./docs
       - name: Setup index.html
         run: |
-          cp docs/github_pages/api_doc_pages.html RapiDoc/dist/index.html
-          cp docs/et-api-docs /RapiDoc/dist/et-api-docs
+          cp ./docs/github_pages/api_doc_pages.html ./RapiDoc/dist/index.html
+          cp ./docs/et-api-docs ./RapiDoc/dist/et-api-docs
           bash docs/github_pages/setup_rapidoc_index.sh
         env:
           PAGE_TITLE: "API Doc"
