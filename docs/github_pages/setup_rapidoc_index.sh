@@ -1,5 +1,5 @@
 set -e
-INDEX_BASE=/RapiDoc/dist
+INDEX_BASE=RapiDoc/dist
 INDEX_FILE=$INDEX_BASE/index.html
 sed -i -e "s|%PAGE_TITLE%|$PAGE_TITLE|g" $INDEX_FILE
 sed -i -e "s|%PAGE_FAVICON%|$PAGE_FAVICON|g" $INDEX_FILE
